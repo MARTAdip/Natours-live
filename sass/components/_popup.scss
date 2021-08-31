@@ -1,0 +1,135 @@
+.popup {
+  height: 100vh;
+  width: 100%;
+
+  background-color: rgba($color-black, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  
+  opacity: 0; // if i only use opacity 0 the content is still there , so i need to specify visibility hidden
+  visibility: hidden;
+  transition: all 0.3s;
+  
+
+  // feature query
+  @supports(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);  // add a filter behind an element
+    background-color: rgba($color-black, 0.3);
+  }
+
+
+  &__content {
+    @include center-horizontal-vertical;
+    width: 75%;
+    background-color: $color-white;
+
+    box-shadow: 0 2rem 4rem $box-shadow-color-medium;
+    border-radius: 3px;
+
+    display: table;
+    overflow: hidden;
+    opacity: 0;
+    transform:  translate(-50%, -50%) scale(0);  // i have to repeat the trasnformation, because can have only 1 tranform per block so i have to chain them
+
+    transition: all 0.5s 0.2s;
+
+    @include respond(phone) {
+      width: 100%;
+      top: 68%;
+      left: 50%;
+      bottom: -100%;
+      display: block;
+    }
+  }
+
+  &__left {
+    width: 33.33333%;
+    display: table-cell;
+
+    @include respond(phone) {
+      width: 88%;
+      text-align: center;
+    }
+  }
+
+  &__right {
+    width: 66.666667%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem;
+
+    @include respond(phone) {
+      padding: 1rem 2rem;
+      display: initial;
+
+        h3 {
+          padding: 1.5rem;
+        }
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    @include respond(phone) {
+      display: inline-block;
+      width: 143px;
+    }
+  }
+
+  &__text {
+    font-size: 1.4rem;
+
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid $color-gray-light-2;
+
+    hyphens: auto;
+    @include respond(phone) {
+      column-count: 1;
+      padding: 2rem;
+    }
+  }
+
+  // POPUP FUNCTIONALITY
+
+  // open state
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:target &__content {
+    opacity: 1;
+    transform:  translate(-50%, -50%) scale(1); 
+  }
+
+  //closing
+  
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-gray-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  .btn.btn--green {
+    @include respond(phone) {
+      margin-left: 20px;
+    }
+  }
+}

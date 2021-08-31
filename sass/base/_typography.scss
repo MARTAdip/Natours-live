@@ -1,0 +1,99 @@
+// REM are always in relation to the root font-size 
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: $color-gray-dark;
+  
+}
+
+.header__text-box {
+
+  .heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+    
+    -webkit-backface-visibility: hidden; /* hack to avoid any shifting to the top of the animation , avoid any shacking , cannot be used for rotating , otherwise you would not see the back part */
+    backface-visibility: hidden; /* hack to avoid any shifting to the top of the animation , avoid any shacking , cannot be used for rotating , otherwise you would not see the back part */
+    margin-bottom: 6rem;
+    
+    &--main {
+      display: block;
+      font-size: 6rem;
+      font-weight: 400;
+      letter-spacing: 3.5rem;
+      
+      animation: moveInLeft;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+      /*animation-delay: 3s; 
+      animation-iteration-count: 3;
+      */
+
+      @include respond(phone){ 
+        letter-spacing: 1rem;
+        font-size: 5rem;
+      }
+    }
+    &--sub {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1.75rem;
+      animation: moveInRight 1s ease-out;
+
+      @include respond(phone){ 
+        letter-spacing: 0.5rem;
+      }
+    }
+  }
+}
+
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: all .2s; 
+
+  background-image: none;
+  color: $color-primary-light;
+  
+  @include respond(tab-port){ 
+    font-size: 3rem;
+  }
+  @include respond(phone){ 
+    font-size: 2.5rem;
+  }
+  
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    -webkit-background-clip: text; 
+    background-clip: text;
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    color: transparent; 
+  }
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+  }
+}
+  
+
+.heading-tertiary {
+  font-size: $default-font-size;
+  text-transform: uppercase;
+  font-weight:700;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

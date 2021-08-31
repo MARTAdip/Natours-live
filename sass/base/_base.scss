@@ -1,0 +1,43 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%; /* (video 18)here we set the root font-size to be 10px, so 1 rem is 10px, it's easier to calculate amd replace all the px measures in rem, but if we set to px, the user can no longer change the font-size of the browser or zoom-in, so we have to set to a percentage, 100% would be 16px, the default browser font-size, but we still want to maintain this 10px, so we divide 10 by 16 => 0.625 and we trasform this to % => 62.5% */
+  // this define what 1rem is  1rem = 10px, 10px/16px = 62.5%
+
+  // @include respond-phone {
+  //   font-size: 50%;
+  // }
+  
+  @include respond(tab-port){  // width < 900 ?
+    font-size: 50%; // 1rem = 8px, 8/16 = 50%
+  }
+  @include respond(tab-land){  // width < 1200 ?
+    font-size: 56.25%;  // 1rem = 9px, 9/16 = 50
+  }
+
+  @include respond(big-desktop){
+    font-size: 75%;  // 1rem = 12, 12/26
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem; /* was 30px */
+
+  @include respond(tab-port){ 
+    padding: 0;
+  }
+}
+
+::selection {  // change the behaviour of the text selected by the user 
+  background-color: $color-primary;
+  color: $color-white; 
+}
+
+
+// REM are always in relation to the root font-size

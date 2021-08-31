@@ -1,0 +1,75 @@
+.header {
+  height: 85vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero-small.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+
+ 
+
+  /* clip-path: polygon(x y, x y, x y, x y); coordinates x -axis y-axis, clockworkwise*/
+  /* clip-path: polygon(50% 0, 50% 0, 100% 100%, 0 100%); TRIANGOLO
+ */
+
+ @supports(clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  height: 95vh;
+}
+
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  // media queries for screen resolution
+  // 192dpi is the resolution of a apple retina screen
+  // 1 min-with 600px = 600/16 37.5em
+  // 2 miin-width 200px = 2000/16 125em
+
+  @media  only screen and (min-resolution: 192dpi) and (min-width: 37.5em),  
+          only screen and   (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),  // for safari !!!!
+          only screen and   (min-width: 125em) {
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg);
+  }
+
+
+  
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem; /* was 40px etc etc */
+    left: 4rem;
+
+    &:hover {
+      &__logo {
+        animation: moveInRight 4s ease-out;
+        /* When we were hovering over the logo and animating it, the logo wanted to move; but when it did, our hover state was lost since the element was no longer under our active mouse.  Essentially, the logo was 'freaking' out because it didn't know whether to animate / move or stay statically positioned, thus, we were left with an ugly, Shrodinger flicker effect.
+        
+        When we hover over the container (logo-box) instead, the logo is free to move as intended since our container remains static.  Now, I invite you to hover over the logo-box, then quickly move your cursor out of the boundaries of the box.  You will see the animation end abruptly--this is what was happening to our logo before making our changes. */
+      }
+    }
+  }
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
